@@ -31,18 +31,18 @@ video {
   object-fit: cover;
 }
 
-/* overlay kanan */
+/* UI kanan */
 .ui {
   position: absolute;
-  right: 10px;
-  bottom: 80px;
+  right: 12px;
+  bottom: 90px;
   color: white;
   text-align: center;
 }
 
 .ui div {
-  margin: 15px 0;
-  font-size: 14px;
+  margin: 18px 0;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -50,19 +50,20 @@ video {
 .bottom {
   position: absolute;
   bottom: 20px;
-  left: 10px;
+  left: 12px;
   color: white;
 }
 
 /* tombol */
 button {
-  padding: 10px 20px;
+  padding: 12px 25px;
   border-radius: 30px;
   border: none;
   margin-top: 10px;
+  font-size: 16px;
 }
 
-/* popup komentar */
+/* komentar */
 #commentBox {
   position: fixed;
   bottom: 0;
@@ -71,8 +72,8 @@ button {
   color: black;
   display: none;
   padding: 20px;
+  border-radius: 15px 15px 0 0;
 }
-
 </style>
 </head>
 
@@ -80,9 +81,11 @@ button {
 
 <div class="wrapper">
 
-  <!-- VIDEO 1 -->
+  <!-- SLIDE 1 -->
   <div class="slide">
-    <video src="copy_E8BDE56E-83B1-4FD4-A0D6-B4DE819C7DC5.mov" autoplay muted loop></video>
+    <video autoplay muted loop playsinline>
+      <source src="copy_E8BDE56E-83B1-4FD4-A0D6-B4DE819C7DC5.mov" type="video/quicktime">
+    </video>
 
     <div class="ui">
       <div onclick="like(this)">❤️<br><span>120</span></div>
@@ -92,30 +95,23 @@ button {
 
     <div class="bottom">
       <h3>@AldyPrayogaa</h3>
-      <p>🔥 Jangan skip video ini</p>
+      <p>🔥 Jangan skip video ini 😱</p>
     </div>
   </div>
 
-  <!-- VIDEO 2 (SUBSCRIBE CTA) -->
+  <!-- SLIDE 2 -->
   <div class="slide">
-    <video src="video2.mp4" autoplay muted loop></video>
+    <video autoplay muted loop playsinline>
+      <source src="video2.mp4" type="video/mp4">
+    </video>
 
     <div class="bottom">
       <h2>🔥 Support Dulu 🔥</h2>
+      <p>Subscribe biar gak ketinggalan</p>
+
       <a href="https://www.youtube.com/@AldyPrayogaa?sub_confirmation=1" target="_blank">
         <button>SUBSCRIBE</button>
       </a>
-    </div>
-  </div>
-
-  <!-- VIDEO 3 (GAME) -->
-  <div class="slide">
-    <video src="video3.mp4" autoplay muted loop></video>
-
-    <div class="bottom">
-      <h2>🎮 TAP GAME</h2>
-      <h3 id="score">0</h3>
-      <button onclick="tap()">TAP</button>
     </div>
   </div>
 
@@ -125,7 +121,8 @@ button {
 <div id="commentBox">
   <h3>Komentar</h3>
   <p>Keren banget 🔥</p>
-  <p>Gue coba juga 😱</p>
+  <p>Gue langsung subscribe 😎</p>
+  <p>Ini viral sih 😱</p>
   <button onclick="closeComment()">Tutup</button>
 </div>
 
@@ -151,13 +148,6 @@ function closeComment() {
 function toggleSound(el) {
   let vid = el.closest(".slide").querySelector("video");
   vid.muted = !vid.muted;
-}
-
-// GAME
-let score = 0;
-function tap() {
-  score++;
-  document.getElementById("score").innerText = score;
 }
 
 // AUTO PLAY / PAUSE
