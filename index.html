@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Viral</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial;
+  background: black;
+}
+
+.wrapper {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.slide {
+  position: relative;
+  height: 100vh;
+  scroll-snap-align: start;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* overlay kanan */
+.ui {
+  position: absolute;
+  right: 10px;
+  bottom: 80px;
+  color: white;
+  text-align: center;
+}
+
+.ui div {
+  margin: 15px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* bawah */
+.bottom {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  color: white;
+}
+
+/* tombol */
+button {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: none;
+  margin-top: 10px;
+}
+
+/* popup komentar */
+#commentBox {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  color: black;
+  display: none;
+  padding: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- VIDEO 1 -->
+  <div class="slide">
+    <video src="video1.mp4" autoplay muted loop></video>
+
+    <div class="ui">
+      <div onclick="like(this)">❤️<br><span>120</span></div>
+      <div onclick="openComment()">💬</div>
+      <div onclick="toggleSound(this)">🔊</div>
+    </div>
+
+    <div class="bottom">
+      <h3>@AldyPrayogaa</h3>
+      <p>🔥 Jangan skip video ini</p>
+    </div>
+  </div>
+
+  <!-- VIDEO 2 (SUBSCRIBE CTA) -->
+  <div class="slide">
+    <video src="video2.mp4" autoplay muted loop></video>
+
+    <div class="bottom">
+      <h2>🔥 Support Dulu 🔥</h2>
+      <a href="https://www.youtube.com/@AldyPrayogaa?sub_confirmation=1" target="_blank">
+        <button>SUBSCRIBE</button>
+      </a>
+    </div>
+  </div>
+
+  <!-- VIDEO 3 (GAME) -->
+  <div class="slide">
+    <video src="video3.mp4" autoplay muted loop></video>
+
+    <div class="bottom">
+      <h2>🎮 TAP GAME</h2>
+      <h3 id="score">0</h3>
+      <button onclick="tap()">TAP</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- komentar -->
+<div id="commentBox">
+  <h3>Komentar</h3>
+  <p>Keren banget 🔥</p>
+  <p>Gue coba juga 😱</p>
+  <button onclick="closeComment()">Tutup</button>
+</div>
+
+<script>
+
+// LIKE
+function like(el) {
+  let span = el.querySelector("span");
+  let val = parseInt(span.innerText);
+  span.innerText = val + 1;
+}
+
+// KOMENTAR
+function openComment() {
+  document.getElementById("commentBox").style.display = "block";
+}
+
+function closeComment() {
+  document.getElementById("commentBox").style.display = "none";
+}
+
+// SOUND
+function toggleSound(el) {
+  let vid = el.closest(".slide").querySelector("video");
+  vid.muted = !vid.muted;
+}
+
+// GAME
+let score = 0;
+function tap() {
+  score++;
+  document.getElementById("score").innerText = score;
+}
+
+// AUTO PLAY / PAUSE
+const videos = document.querySelectorAll("video");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.play();
+    } else {
+      entry.target.pause();
+    }
+  });
+}, { threshold: 0.6 });
+
+videos.forEach(v => observer.observe(v));
+
+</script>
+
+</body>
+</html>
